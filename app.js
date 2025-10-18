@@ -355,6 +355,3 @@
 +  requestNotificationPermission();
 +  updateStorageWarning();
 +});
- 
-EOF
-)
