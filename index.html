@@ -1,110 +1,110 @@
-+<!DOCTYPE html>
-+<html lang="fa">
-+<head>
-+  <meta charset="UTF-8" />
-+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-+  <title>یادآور هفتگی کارها</title>
-+  <link rel="preconnect" href="https://fonts.googleapis.com" />
-+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet" />
-+  <link rel="stylesheet" href="styles.css" />
-+</head>
-+<body>
-+  <header class="app-header">
-+    <h1>یادآور هفتگی کارها</h1>
-+    <p class="subtitle">برنامه‌ریزی منظم، مدیریت زمان بهتر</p>
-+  </header>
-+
-+  <main class="layout">
-+    <section class="card form-card">
-+      <h2>افزودن کار جدید</h2>
-+      <form id="task-form" class="task-form" autocomplete="off">
-+        <label class="field">
-+          <span>عنوان کار</span>
-+          <input type="text" id="title" name="title" required />
-+        </label>
-+        <label class="field">
-+          <span>روز هفته</span>
-+          <select id="weekday" name="weekday" required>
-+            <option value="شنبه">شنبه</option>
-+            <option value="یک‌شنبه">یک‌شنبه</option>
-+            <option value="دوشنبه">دوشنبه</option>
-+            <option value="سه‌شنبه">سه‌شنبه</option>
-+            <option value="چهارشنبه">چهارشنبه</option>
-+            <option value="پنج‌شنبه">پنج‌شنبه</option>
-+            <option value="جمعه">جمعه</option>
-+          </select>
-+        </label>
-+        <div class="field time-fields">
-+          <label>
-+            <span>ساعت شروع</span>
-+            <input type="time" id="start-time" name="start-time" required />
-+          </label>
-+          <label>
-+            <span>مدت (دقیقه)</span>
-+            <input type="number" id="duration" name="duration" min="5" step="5" required />
-+          </label>
-+        </div>
-+        <label class="field">
-+          <span>شرح کوتاه</span>
-+          <textarea id="description" name="description" rows="3" placeholder="خلاصه‌ای از کار..." required></textarea>
-+        </label>
-+        <label class="field">
-+          <span>یادآوری چند دقیقه قبل؟</span>
-+          <input type="number" id="reminder-offset" name="reminder-offset" min="0" step="5" value="15" />
-+        </label>
-+        <button type="submit" class="primary">ذخیره کار</button>
-+        <p id="storage-warning" class="storage-warning" hidden>
-+          امکان ذخیره‌سازی دائمی در مرورگر شما فعال نیست. تا زمانی که این صفحه باز باشد کارها نگهداری می‌شوند اما پس از بستن صفحه حذف خواهند شد.
-+        </p>
-+      </form>
-+    </section>
-+
-+    <section class="card list-card">
-+      <div class="list-header">
-+        <h2>کارهای این هفته</h2>
-+        <div class="controls">
-+          <label class="toggle">
-+            <input type="checkbox" id="sort-toggle" />
-+            <span>مرتب‌سازی بر اساس مدت</span>
-+          </label>
-+          <button id="clear-all" class="ghost">حذف همه</button>
-+        </div>
-+      </div>
-+      <div id="task-list" class="task-list"></div>
-+      <p id="empty-state" class="empty-state">هنوز کاری ثبت نشده است.</p>
-+    </section>
-+  </main>
-+
-+  <dialog id="reminder-dialog" class="reminder-dialog">
-+    <div class="dialog-content">
-+      <h3 id="reminder-title"></h3>
-+      <p class="reminder-time" id="reminder-time"></p>
-+      <p id="reminder-description"></p>
-+      <a id="reminder-calendar-link" class="calendar-link" href="#" target="_blank" rel="noopener">مشاهده در گوگل کلندر</a>
-+      <div class="dialog-actions">
-+        <button id="dismiss-reminder" class="primary">باشه</button>
-+      </div>
-+    </div>
-+  </dialog>
-+
-+  <template id="task-template">
-+    <article class="task-card">
-+      <header>
-+        <div>
-+          <h3 class="task-title"></h3>
-+          <p class="task-meta"></p>
-+        </div>
-+        <button class="icon-button delete" title="حذف کار" aria-label="حذف کار">×</button>
-+      </header>
-+      <p class="task-description"></p>
-+      <footer class="task-footer">
-+        <a class="calendar-link" target="_blank" rel="noopener">افزودن به گوگل کلندر</a>
-+        <span class="reminder-badge"></span>
-+      </footer>
-+    </article>
-+  </template>
-+
-+  <script src="app.js" type="module"></script>
-+</body>
-+</html>
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>یادآور هفتگی کارها</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>یادآور هفتگی کارها</h1>
+    <p class="subtitle">برنامه‌ریزی منظم، مدیریت زمان بهتر</p>
+  </header>
+
+  <main class="layout">
+    <section class="card form-card">
+      <h2>افزودن کار جدید</h2>
+      <form id="task-form" class="task-form" autocomplete="off">
+        <label class="field">
+          <span>عنوان کار</span>
+          <input type="text" id="title" name="title" required />
+        </label>
+        <label class="field">
+          <span>روز هفته</span>
+          <select id="weekday" name="weekday" required>
+            <option value="شنبه">شنبه</option>
+            <option value="یک‌شنبه">یک‌شنبه</option>
+            <option value="دوشنبه">دوشنبه</option>
+            <option value="سه‌شنبه">سه‌شنبه</option>
+            <option value="چهارشنبه">چهارشنبه</option>
+            <option value="پنج‌شنبه">پنج‌شنبه</option>
+            <option value="جمعه">جمعه</option>
+          </select>
+        </label>
+        <div class="field time-fields">
+          <label>
+            <span>ساعت شروع</span>
+            <input type="time" id="start-time" name="start-time" required />
+          </label>
+          <label>
+            <span>مدت (دقیقه)</span>
+            <input type="number" id="duration" name="duration" min="5" step="5" required />
+          </label>
+        </div>
+        <label class="field">
+          <span>شرح کوتاه</span>
+          <textarea id="description" name="description" rows="3" placeholder="خلاصه‌ای از کار..." required></textarea>
+        </label>
+        <label class="field">
+          <span>یادآوری چند دقیقه قبل؟</span>
+          <input type="number" id="reminder-offset" name="reminder-offset" min="0" step="5" value="15" />
+        </label>
+        <button type="submit" class="primary">ذخیره کار</button>
+        <p id="storage-warning" class="storage-warning" hidden>
+          امکان ذخیره‌سازی دائمی در مرورگر شما فعال نیست. تا زمانی که این صفحه باز باشد کارها نگهداری می‌شوند اما پس از بستن صفحه حذف خواهند شد.
+        </p>
+      </form>
+    </section>
+
+    <section class="card list-card">
+      <div class="list-header">
+        <h2>کارهای این هفته</h2>
+        <div class="controls">
+          <label class="toggle">
+            <input type="checkbox" id="sort-toggle" />
+            <span>مرتب‌سازی بر اساس مدت</span>
+          </label>
+          <button id="clear-all" class="ghost">حذف همه</button>
+        </div>
+      </div>
+      <div id="task-list" class="task-list"></div>
+      <p id="empty-state" class="empty-state">هنوز کاری ثبت نشده است.</p>
+    </section>
+  </main>
+
+  <dialog id="reminder-dialog" class="reminder-dialog">
+    <div class="dialog-content">
+      <h3 id="reminder-title"></h3>
+      <p class="reminder-time" id="reminder-time"></p>
+      <p id="reminder-description"></p>
+      <a id="reminder-calendar-link" class="calendar-link" href="#" target="_blank" rel="noopener">مشاهده در گوگل کلندر</a>
+      <div class="dialog-actions">
+        <button id="dismiss-reminder" class="primary">باشه</button>
+      </div>
+    </div>
+  </dialog>
+
+  <template id="task-template">
+    <article class="task-card">
+      <header>
+        <div>
+          <h3 class="task-title"></h3>
+          <p class="task-meta"></p>
+        </div>
+        <button class="icon-button delete" title="حذف کار" aria-label="حذف کار">×</button>
+      </header>
+      <p class="task-description"></p>
+      <footer class="task-footer">
+        <a class="calendar-link" target="_blank" rel="noopener">افزودن به گوگل کلندر</a>
+        <span class="reminder-badge"></span>
+      </footer>
+    </article>
+  </template>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
