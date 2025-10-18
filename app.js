@@ -1,9 +1,3 @@
-diff --git a/app.js b/app.js
-new file mode 100644
-index 0000000000000000000000000000000000000000..5f038ce7b715685d5283219b159bb4f30cf76b9c
---- /dev/null
-+++ b/app.js
-@@ -0,0 +1,257 @@
 +const form = document.getElementById("task-form");
 +const taskList = document.getElementById("task-list");
 +const emptyState = document.getElementById("empty-state");
