@@ -25,28 +25,127 @@
 +
 +const reminderTimeouts = new Map();
 +
-+function loadTasks() {
++const storage = createStorage();
++const storageWarning = document.getElementById("storage-warning");
++
++function createStorage() {
++  let memoryTasks = [];
++  let memorySortPreference = false;
++  let persistent = true;
++
++  const fallback = {
++    loadTasks: () => memoryTasks.map((task) => ({ ...task })),
++    saveTasks: (tasks) => {
++      memoryTasks = tasks.map((task) => ({ ...task }));
++    },
++    loadSortPreference: () => memorySortPreference,
++    saveSortPreference: (enabled) => {
++      memorySortPreference = enabled;
++    },
++  };
++
 +  try {
-+    const raw = localStorage.getItem(STORAGE_KEY);
-+    return raw ? JSON.parse(raw) : [];
++    const testKey = "weekly-reminder-test";
++    window.localStorage.setItem(testKey, "1");
++    window.localStorage.removeItem(testKey);
 +  } catch (error) {
-+    console.error("Failed to parse stored tasks", error);
-+    return [];
++    console.warn("Local storage is not available; falling back to in-memory storage.", error);
++    persistent = false;
 +  }
++
++  function parseTasks(raw) {
++    if (!raw) return [];
++    try {
++      const parsed = JSON.parse(raw);
++      return Array.isArray(parsed) ? parsed : [];
++    } catch (error) {
++      console.error("Failed to parse stored tasks", error);
++      return [];
++    }
++  }
++
++  return {
++    loadTasks() {
++      if (!persistent) {
++        return fallback.loadTasks();
++      }
++      try {
++        return parseTasks(window.localStorage.getItem(STORAGE_KEY));
++      } catch (error) {
++        console.error("Unable to read tasks from local storage", error);
++        persistent = false;
++        return fallback.loadTasks();
++      }
++    },
++    saveTasks(tasks) {
++      if (!persistent) {
++        fallback.saveTasks(tasks);
++        return;
++      }
++      try {
++        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
++      } catch (error) {
++        console.error("Unable to persist tasks", error);
++        persistent = false;
++        fallback.saveTasks(tasks);
++      }
++    },
++    loadSortPreference() {
++      if (!persistent) {
++        return fallback.loadSortPreference();
++      }
++      try {
++        const raw = window.localStorage.getItem(SORT_KEY);
++        return raw === "duration";
++      } catch (error) {
++        console.error("Unable to read sort preference", error);
++        persistent = false;
++        return fallback.loadSortPreference();
++      }
++    },
++    saveSortPreference(enabled) {
++      if (!persistent) {
++        fallback.saveSortPreference(enabled);
++        return;
++      }
++      try {
++        window.localStorage.setItem(SORT_KEY, enabled ? "duration" : "default");
++      } catch (error) {
++        console.error("Unable to persist sort preference", error);
++        persistent = false;
++        fallback.saveSortPreference(enabled);
++      }
++    },
++    isPersistent() {
++      return persistent;
++    },
++  };
++}
++
++function updateStorageWarning() {
++  if (!storageWarning) return;
++  storageWarning.hidden = storage.isPersistent();
++}
++
++function loadTasks() {
++  return storage.loadTasks();
 +}
 +
 +function saveTasks(tasks) {
-+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
++  storage.saveTasks(tasks);
++  updateStorageWarning();
 +}
 +
 +function loadSortPreference() {
-+  const raw = localStorage.getItem(SORT_KEY);
-+  return raw === "duration";
++  return storage.loadSortPreference();
 +}
 +
 +function saveSortPreference(enabled) {
-+  localStorage.setItem(SORT_KEY, enabled ? "duration" : "default");
++  storage.saveSortPreference(enabled);
++  updateStorageWarning();
 +}
++
++updateStorageWarning();
 +
 +function getNextOccurrence(weekday, time) {
 +  const now = new Date();
@@ -254,4 +353,8 @@
 +  renderTasks(tasks);
 +  scheduleReminders(tasks);
 +  requestNotificationPermission();
++  updateStorageWarning();
 +});
+ 
+EOF
+)
