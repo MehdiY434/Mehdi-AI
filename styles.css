@@ -1,309 +1,326 @@
-:root {
-  color-scheme: light dark;
-  --bg: #f4f6fb;
-  --card: #ffffffdd;
-  --card-dark: rgba(30, 34, 48, 0.85);
-  --text: #17223a;
-  --muted: #5c6b8a;
-  --accent: #5661ff;
-  --accent-strong: #2832f5;
-  --danger: #ff6b6b;
-  --radius: 18px;
-  font-family: "Vazirmatn", sans-serif;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(180deg, #e0e7ff 0%, #f8f9ff 100%);
-  color: var(--text);
-  min-height: 100vh;
-  direction: rtl;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.app-header {
-  text-align: center;
-  padding: 3rem 1.5rem 2rem;
-}
-
-.app-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-.subtitle {
-  margin-top: 0.5rem;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-.layout {
-  display: grid;
-  gap: 1.5rem;
-  padding: 0 1.5rem 3rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-@media (min-width: 900px) {
-  .layout {
-    grid-template-columns: minmax(280px, 360px) 1fr;
-    align-items: flex-start;
-  }
-}
-
-.card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
-  padding: 1.8rem;
-  backdrop-filter: blur(8px);
-}
-
-.task-form {
-  display: grid;
-  gap: 1rem;
-}
-
-.field span {
-  display: inline-block;
-  margin-bottom: 0.4rem;
-  font-weight: 600;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 0.65rem 0.75rem;
-  border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  font: inherit;
-  background-color: #fff;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(86, 97, 255, 0.15);
-}
-
-textarea {
-  resize: vertical;
-}
-
-.time-fields {
-  display: grid;
-  gap: 0.75rem;
-}
-
-@media (min-width: 600px) {
-  .time-fields {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.primary {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 999px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.primary:hover,
-.primary:focus {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(86, 97, 255, 0.25);
-}
-
-.ghost {
-  border: 1px solid rgba(15, 23, 42, 0.18);
-  background: transparent;
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 0.5rem 1.3rem;
-  cursor: pointer;
-}
-
-.list-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.75rem;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.task-list {
-  display: grid;
-  gap: 1rem;
-}
-
-.task-card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 16px;
-  padding: 1.2rem 1.4rem;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  display: grid;
-  gap: 0.9rem;
-  position: relative;
-}
-
-.task-card header {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.task-title {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.task-meta {
-  margin: 0.2rem 0 0;
-  color: var(--muted);
-}
-
-.task-description {
-  margin: 0;
-  line-height: 1.8;
-}
-
-.task-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.calendar-link {
-  color: var(--accent-strong);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.calendar-link:hover {
-  text-decoration: underline;
-}
-
-.reminder-badge {
-  background: rgba(86, 97, 255, 0.15);
-  color: var(--accent-strong);
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-}
-
-.icon-button {
-  border: none;
-  background: rgba(15, 23, 42, 0.05);
-  color: var(--danger);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.icon-button:hover {
-  background: rgba(255, 107, 107, 0.15);
-}
-
-.toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--muted);
-}
-
-.toggle input {
-  width: auto;
-}
-
-.empty-state {
-  margin: 0;
-  text-align: center;
-  color: var(--muted);
-  padding: 2rem 0;
-}
-
-.reminder-dialog::backdrop {
-  background: rgba(23, 34, 58, 0.55);
-}
-
-.reminder-dialog {
-  border: none;
-  border-radius: 18px;
-  padding: 0;
-  max-width: 360px;
-  width: 90%;
-}
-
-.dialog-content {
-  padding: 1.8rem;
-  display: grid;
-  gap: 0.85rem;
-}
-
-.dialog-content h3 {
-  margin: 0;
-}
-
-.reminder-time {
-  color: var(--muted);
-  margin: 0;
-}
-
-.dialog-actions {
-  text-align: left;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: radial-gradient(circle at top, #1e253d 0%, #121528 65%, #0b0e1d 100%);
-    color: #f1f5ff;
-  }
-
-  .card,
-  .task-card {
-    background: var(--card-dark);
-    color: inherit;
-  }
-
-  input,
-  textarea,
-  select {
-    background: rgba(255, 255, 255, 0.07);
-    color: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-  }
-
-  .icon-button {
-    background: rgba(255, 255, 255, 0.08);
-    color: #ff9a9a;
-  }
-
-  .ghost {
-    border-color: rgba(255, 255, 255, 0.25);
-    color: #dbe1ff;
-  }
-
-  .calendar-link {
-    color: #a5b4ff;
-  }
-}
++:root {
++  color-scheme: light dark;
++  --bg: #f4f6fb;
++  --card: #ffffffdd;
++  --card-dark: rgba(30, 34, 48, 0.85);
++  --text: #17223a;
++  --muted: #5c6b8a;
++  --accent: #5661ff;
++  --accent-strong: #2832f5;
++  --danger: #ff6b6b;
++  --radius: 18px;
++  font-family: "Vazirmatn", sans-serif;
++}
++
++body {
++  margin: 0;
++  padding: 0;
++  background: linear-gradient(180deg, #e0e7ff 0%, #f8f9ff 100%);
++  color: var(--text);
++  min-height: 100vh;
++  direction: rtl;
++}
++
++* {
++  box-sizing: border-box;
++}
++
++.app-header {
++  text-align: center;
++  padding: 3rem 1.5rem 2rem;
++}
++
++.app-header h1 {
++  margin: 0;
++  font-size: 2.5rem;
++}
++
++.subtitle {
++  margin-top: 0.5rem;
++  color: var(--muted);
++  font-weight: 500;
++}
++
++.layout {
++  display: grid;
++  gap: 1.5rem;
++  padding: 0 1.5rem 3rem;
++  max-width: 1100px;
++  margin: 0 auto;
++}
++
++@media (min-width: 900px) {
++  .layout {
++    grid-template-columns: minmax(280px, 360px) 1fr;
++    align-items: flex-start;
++  }
++}
++
++.card {
++  background: var(--card);
++  border-radius: var(--radius);
++  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
++  padding: 1.8rem;
++  backdrop-filter: blur(8px);
++}
++
++.task-form {
++  display: grid;
++  gap: 1rem;
++}
++
++.field span {
++  display: inline-block;
++  margin-bottom: 0.4rem;
++  font-weight: 600;
++}
++
++input,
++textarea,
++select {
++  width: 100%;
++  padding: 0.65rem 0.75rem;
++  border-radius: 12px;
++  border: 1px solid rgba(15, 23, 42, 0.12);
++  font: inherit;
++  background-color: #fff;
++  transition: border 0.2s ease, box-shadow 0.2s ease;
++}
++
++input:focus,
++textarea:focus,
++select:focus {
++  outline: none;
++  border-color: var(--accent);
++  box-shadow: 0 0 0 4px rgba(86, 97, 255, 0.15);
++}
++
++textarea {
++  resize: vertical;
++}
++
++.time-fields {
++  display: grid;
++  gap: 0.75rem;
++}
++
++@media (min-width: 600px) {
++  .time-fields {
++    grid-template-columns: repeat(2, minmax(0, 1fr));
++  }
++}
++
++.primary {
++  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
++  color: #fff;
++  border: none;
++  padding: 0.75rem 1.5rem;
++  border-radius: 999px;
++  font-weight: 700;
++  cursor: pointer;
++  transition: transform 0.2s ease, box-shadow 0.2s ease;
++}
++
++.primary:hover,
++.primary:focus {
++  transform: translateY(-1px);
++  box-shadow: 0 12px 24px rgba(86, 97, 255, 0.25);
++}
++
++.ghost {
++  border: 1px solid rgba(15, 23, 42, 0.18);
++  background: transparent;
++  color: var(--muted);
++  border-radius: 999px;
++  padding: 0.5rem 1.3rem;
++  cursor: pointer;
++}
++
++.list-header {
++  display: flex;
++  flex-wrap: wrap;
++  justify-content: space-between;
++  gap: 0.75rem;
++  align-items: center;
++  margin-bottom: 1rem;
++}
++
++.task-list {
++  display: grid;
++  gap: 1rem;
++}
++
++.task-card {
++  background: rgba(255, 255, 255, 0.92);
++  border-radius: 16px;
++  padding: 1.2rem 1.4rem;
++  border: 1px solid rgba(15, 23, 42, 0.08);
++  display: grid;
++  gap: 0.9rem;
++  position: relative;
++}
++
++.task-card header {
++  display: flex;
++  justify-content: space-between;
++  gap: 0.75rem;
++}
++
++.task-title {
++  margin: 0;
++  font-size: 1.2rem;
++}
++
++.task-meta {
++  margin: 0.2rem 0 0;
++  color: var(--muted);
++}
++
++.task-description {
++  margin: 0;
++  line-height: 1.8;
++}
++
++.task-footer {
++  display: flex;
++  justify-content: space-between;
++  align-items: center;
++  gap: 0.75rem;
++  flex-wrap: wrap;
++}
++
++.calendar-link {
++  color: var(--accent-strong);
++  font-weight: 600;
++  text-decoration: none;
++}
++
++.calendar-link:hover {
++  text-decoration: underline;
++}
++
++.reminder-badge {
++  background: rgba(86, 97, 255, 0.15);
++  color: var(--accent-strong);
++  padding: 0.25rem 0.75rem;
++  border-radius: 999px;
++  font-size: 0.85rem;
++}
++
++.icon-button {
++  border: none;
++  background: rgba(15, 23, 42, 0.05);
++  color: var(--danger);
++  width: 36px;
++  height: 36px;
++  border-radius: 50%;
++  font-size: 1.2rem;
++  font-weight: 700;
++  cursor: pointer;
++  transition: background 0.2s ease;
++}
++
++.icon-button:hover {
++  background: rgba(255, 107, 107, 0.15);
++}
++
++.toggle {
++  display: flex;
++  align-items: center;
++  gap: 0.35rem;
++  color: var(--muted);
++}
++
++.toggle input {
++  width: auto;
++}
++
++.empty-state {
++  margin: 0;
++  text-align: center;
++  color: var(--muted);
++  padding: 2rem 0;
++}
++
++.storage-warning {
++  margin: 1rem 0 0;
++  padding: 0.85rem 1rem;
++  border-radius: 14px;
++  background: rgba(255, 193, 7, 0.15);
++  border: 1px solid rgba(255, 193, 7, 0.35);
++  color: #8a5a00;
++  font-size: 0.9rem;
++  line-height: 1.6;
++}
++
++.reminder-dialog::backdrop {
++  background: rgba(23, 34, 58, 0.55);
++}
++
++.reminder-dialog {
++  border: none;
++  border-radius: 18px;
++  padding: 0;
++  max-width: 360px;
++  width: 90%;
++}
++
++.dialog-content {
++  padding: 1.8rem;
++  display: grid;
++  gap: 0.85rem;
++}
++
++.dialog-content h3 {
++  margin: 0;
++}
++
++.reminder-time {
++  color: var(--muted);
++  margin: 0;
++}
++
++.dialog-actions {
++  text-align: left;
++}
++
++@media (prefers-color-scheme: dark) {
++  body {
++    background: radial-gradient(circle at top, #1e253d 0%, #121528 65%, #0b0e1d 100%);
++    color: #f1f5ff;
++  }
++
++  .card,
++  .task-card {
++    background: var(--card-dark);
++    color: inherit;
++  }
++
++  input,
++  textarea,
++  select {
++    background: rgba(255, 255, 255, 0.07);
++    color: inherit;
++    border: 1px solid rgba(255, 255, 255, 0.18);
++  }
++
++  .icon-button {
++    background: rgba(255, 255, 255, 0.08);
++    color: #ff9a9a;
++  }
++
++  .ghost {
++    border-color: rgba(255, 255, 255, 0.25);
++    color: #dbe1ff;
++  }
++
++  .calendar-link {
++    color: #a5b4ff;
++  }
++
++  .storage-warning {
++    background: rgba(255, 193, 7, 0.2);
++    border-color: rgba(255, 213, 90, 0.55);
++    color: #ffd36b;
++  }
++}
